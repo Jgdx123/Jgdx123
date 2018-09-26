@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="technology," />
+  <meta name="keywords" content="technology,C," />
 
 
 
@@ -79,15 +79,18 @@
 
 
 
-<meta name="keywords" content="technology">
+<meta name="description" content="This is the note what i learned from C.">
+<meta name="keywords" content="technology,C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My first blog">
+<meta property="og:title" content="Notes about C">
 <meta property="og:url" content="http://yoursite.com/2018/09/26/post/index.html">
 <meta property="og:site_name" content="Error 520">
+<meta property="og:description" content="This is the note what i learned from C.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T16:41:03.829Z">
+<meta property="og:updated_time" content="2018-09-26T13:39:11.925Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My first blog">
+<meta name="twitter:title" content="Notes about C">
+<meta name="twitter:description" content="This is the note what i learned from C.">
 
 
 
@@ -123,7 +126,7 @@
 
 
 
-  <title>My first blog | Error 520</title>
+  <title>Notes about C | Error 520</title>
   
 
 
@@ -267,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">My first blog</h1>
+          <h1 class="post-title" itemprop="name headline">Notes about C</h1>
         
 
         <div class="post-meta">
@@ -339,7 +342,248 @@
       
 
       
-        
+        <p>This is the note what i learned from C.</p>
+<a id="more"></a>
+<h2 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h2><pre><code>变量的一般形式：
+&lt;类型名称&gt; &lt;变量名称&gt; = &lt;初始值&gt;;
+    例如：
+    int a = 0;
+    int price = 0;
+变量名（标识符）可以由字母，数字，下划线组成。  
+所有变量在被使用前应当被赋予一个初始值。
+
+&quot;ANSI C&quot; —— 只能在代码开头定义变量。
+&quot;C99&quot; —— 可以在代码的任何地方定义变量。
+
+const是一个修饰符，加在int前面，用来给予变量一个不变的属性。
+（若尝试将其进行修改，将被编译器指为一个错误）
+
+两个整数的运算结果也只能是整数。  
+当浮点数和整数放到一起运算时，C会自动将整数转化成浮点数。
+
+double 双精度浮点数
+float 单精度浮点数 
+
+赋值运算符的运算方式始终是自右向左的。其优先级非常低。
+不要使用嵌入式赋值。 
+
+复合赋值符：
++= -= *= /=
+-- ++ （给变量加1）（符号可以放在变量的前面和后面：a++的结果是a本身，其作用导致a的值加1；++a的结果是a加1以后的值，其作用导致a的值加1）
+</code></pre><h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><pre><code>一个程序的大致结构就是输入一些数值，进行一些运算，输出一些结果。
+
+if语句，当在判断后不加中括号，则if以及else之后只能运行一行代码。否则可能会出错。
+else总是要和它最近的那个if去匹配。
+if语句只要求（）里的值是否为零，所有（）内的判断最终会被理解为其是否为零，若正确则不为零，若错误则为零。
+
+学会尊重&quot;warning&quot;
+
+switch-case 
+1.switch后的（控制表达式）只能是整数型的结果。
+2.case后的常量可以是常数，也可以是常数计算的表达式。
+3.在执行完分支中的最后一条语句之后，如果没有break，则会顺序执行到下面的case里面去，直到遇到case。
+4.case不会阻止代码往下运行。
+
+while循环是先进行判断再决定是否继续进行循环。
+do-while循环是先进行一次循环后在进行判断是否在进行循环。
+/*
+do
+{
+    &lt;循环体语句&gt;
+}while(&lt;循环条件&gt;);
+*/
+</code></pre><h2 id="第三天"><a href="#第三天" class="headerlink" title="第三天"></a>第三天</h2><pre><code>对整数的分解：
+a.对一个整数做%10的操作，就得到他的个位数。
+b.对一个整数做/10的操作，就去掉他的个位数。
+
+阶乘：!n=1*2*3*4*...*n
+
+for循环：for(初始条件；循环继续的条件；循环每轮要做的都动作){}
+例：for(a=1;a&gt;0;a--)
+就读成：“对于一开始的a=1，当a&gt;0时，重复做循环体，每一轮循环在做完循环体内语句后，使得a--。
+for循环的三个表达式每一个皆可以省略掉。
+for循环和while循环是等价的。都可以被互相改写。（for(;条件;)==while(条件)）
+
+做求和的程序时，记录结果的变量应该初始化为0。做求积的程序时，记录结果的变量应该初始化为一。
+
+素数：只能被1和自己整除的数，不包括1。
+
+break:跳出循环。
+continue:跳过循环这一轮剩下的语句，直接进入下一轮。
+break和continue都只能对他所在的那一层循环产生效果。
+
+goto 直接让运算跳到指定的位置。 
+
+嵌套的循环各控制变量必须不同。
+
+\t 
+</code></pre><h2 id="第四天"><a href="#第四天" class="headerlink" title="第四天"></a>第四天</h2><pre><code>最大公约数：能够同时整除这两个数的最大的数。最大公约数一定比两个数小。
+
+辗转相除法：
+（a,b）
+1.如果b等于0,则计算结束，a就是最大公约数。
+2.否则，计算a除以b的余数，让a等于b，而b等于那个余数。
+3.回到第一步。
+
+c++和java更加强调类型，对类型的检查更加严格。
+javascript和python和php不看重类型，甚至不需要定义类型。
+
+char &lt; short &lt; int &lt; float &lt; double
+
+sizeof 是一个运算符，给出某个类型或变量在内存中所占据的字节数。
+a.他是一个静态运算符，他的结果在编译时刻就决定了。
+b.不要在sizeof括号里做运算，这些运算将不会做。
+
+char: 一个字节。（8个bit） -128~127
+short: 两个字节。 -32768~32767
+int: 取决于编译器（CPU），通常的意义是“1个字”。（int是用来表达一个寄存器的大小）（32个bit）（-2^(n-1)~-2^(n-1)-1）
+long: 取决于编译器（CPU），通常的意义是“1个字”。可能是四个，可能是八个。
+long long: 八个字节。
+double:64bit. 有效数字：7
+float:32bit.  有效数字：15
+（有效数字：表数精度，只能保证那么多位的十进制数是精确的，只有那么多个数字是有效的）
+（变量的范围中总有无限接近于0的一小块范围我们无法表达）
+
+
+计算机内部一切都是二进制。
+
+补码：计算机中二进制形式的补数。
+     -1 + 1 ——&gt; 0 （0——&gt;00000000; 1——&gt;00000001; 11111111+00000001——&gt;100000000）
+     0 - 1 ——&gt; -1 （00000000-00000001——&gt;11111111）
+     11111111被当作二进制看待时是255，被当作补码看待时是-1。
+    所以对于-a，其补码就是0-a，实际是(2^n)-a，n是这种类型的位数。
+    在计算机系统中，数值一律用补码来表示和存储。
+    补码可以使减法运算变成加法运算。
+
+模定义：一个负整数与其补码的和。
+
+补码计算法定义：非负数的补码是其原码本身；负数的补码是其绝对值的原码最高位符号位不变，其它位取反，再加1。
+补码的意义就是拿补码和原码可以加出一个带溢出的“全零”。
+
+unsigned的初衷时为了进行纯二进制的计算，主要是为了移位，而非扩展数能够表达的范围。
+
+二进制数的范围就像一个环。
+
+整数的输入输出：
+int:%d ; unsigned:%u ; long long:%ld ; unsigned long long:%lu
+
+一个以0开始的数字字面量是8进制；一个以0x开始的数字字面量是16进制。
+%o用于8进制，%x用于16进制。
+8进制和16进制只是如何把数字表达为字符串，与内部如何表达数字无关。
+
+4位二进制是1个十六进制位。所以十六进制很适合表达二进制数据。（早期计算机的字长是12的倍数）
+3位二进制是1个八进制位。
+
+如何选择整数类型：没有特殊需要，就选择int。
+（现在的CPU字长普遍是32位或64位的，一次内存读写就是一个int，一次计算也是一个int。选择更短的类型不会更快，甚至可能会更慢）
+（现代的编译器一般会设计内存对齐，所以更短的内存实际在内存中有可能也占据一个int的大小）
+（unsigned与否只是输出的不同，内部计算是一样的。）
+
+为什么整数要有那么多种：为了准确表达内存，做底层程序的需要。
+</code></pre><h2 id="第五天"><a href="#第五天" class="headerlink" title="第五天"></a>第五天</h2><pre><code>%e：用科学技术法来表达数字。
+科学计数法：
+%f：在%和f之间加上.n可以指定输出小数点后几位，这样的输出是做四舍五入的。
+
+计算机内部的数理论上永远无法被准确表达。
+
+printf输出inf表示超过范围的浮点数。
+printf输出nan表示不存在的浮点数。
+
+带小数点的字面量是double而非float。float需要用f或F后缀来表明身份。
+两个float变量用==相比较可能会失败，因为浮点运算的精度永远是不够的。
+要表示是否相等：例——fabs(f1-f2)&lt;1e-12
+
+整数永远是精确的，带小数点的数永远是不精确的。
+
+选择浮点类型：如果没有特殊需要，直接用double。
+
+char 可以是字符，也可以是整数。
+被&apos;&apos;括起来的字面量为一个字符。
+
+一个字符加一个数字得到ASCⅡ码表中的那个数之后的字符。
+两个字符相减，可以得到他们在表中的距离。
+字母在ASCⅡ表中是顺序排列的，大小写字母分开排列，并不在一起。
+例：a+&apos;a&apos;-&apos;A&apos;可以把大写变成小写；a+&apos;A&apos;-&apos;a&apos;可以把小写变成大写。
+
+逃逸字符：用来表达无法印出来的控制字符或特殊字符。
+\b 回退一格 ；\&quot; 双引号    ；\t 到下一个表格位（固定的位置） ；
+\&apos; 单引号 ；\n 换行 ；\\ 反斜杠本身 ；\r 回车
+（回车和换行是两个不同的动作。输入\n时，电脑会自动帮你输出回车和换行这两个动作）
+
+自动类型转换：当运算符的两边出现不一致的类型时，会自动转换成较大的类型。（大的意思是能表达的数的范围更大）
+特例：对于printf来说，任何小于int的类型会被直接转换成int；float会被转换成double。
+      但是scanf不会，要输入short，需要%hd。
+
+强制类型转换：(类型)值  转换只是暂时改变了值，他不会改变变量本身。
+
+单目运算符的优先级大于双目运算符。
+
+逗号运算符：连接两个表达式，右边的表达式表示整个表达式的值。（主要在for中使用）（其优先级最最低）
+</code></pre><h2 id="第六天"><a href="#第六天" class="headerlink" title="第六天"></a>第六天</h2><pre><code>“代码复制”是程序不良的表现。
+
+函数是一块代码，接收零个或多个参数，做一件事情，并返回零个或多个值。
+
+return 如果函数需要返回一个结果，则需要使用return来返回一个结果。
+停止函数的执行，并送回一个值。（return ; return 表达式）
+一个函数里可以出现多个return语句。
+
+遵循“单一出口理念”。
+
+没有返回值的函数：定义为 void 函数名(参数表) ；不能使用带值的return ；也可以没有return ；调用的时候不能做返回值的赋值。
+
+函数的先后关系：C的编译器是自上而下进行的。
+函数原型，编译器做检查的时候，不会检查参数的名称，只是检查参数的类型
+
+表达式：字面量，变量，函数的返回值，计算的结果。
+调用函数时给的值与参数的类型不匹配是C语言传统上最大的漏洞。
+编译器总是会帮你把类型转换好，但结果可能不是你所期望的。
+c++/java在这方面非常严格。
+
+每个函数都有自己的变量空间，参数也位于这个独立的空间中，和其他函数没有关系。
+
+
+数组：
+&lt;类型&gt; 变量名称[元素数量]；
+  a. int grades[100];
+  b. double weight[20];
+元素数量必须是整数
+c99之前：元素数量必须是编译时刻确定的字面量。之后已经可以用变量来定义数组的大小。
+
+数组是一种容器：所有的元素必须具有相同的数据类型；
+一旦创建，不能再改变大小；
+在内存里面，数组的单元是紧密依次排列的。
+若数组的大小大于了你所初始化的数的两，则未初始化的将被自动赋为零。（前提是已经有至少一个元素被初始化）
+</code></pre><h2 id="第七天"><a href="#第七天" class="headerlink" title="第七天"></a>第七天</h2><pre><code>int a[10]={
+    [0]=2, [2]=3, 6,
+};
+a.用[n]在初始化数据中给出定位
+b.没有定位的数据接在前面的位置后面
+c.其他位置的值补零
+d.也可以不给出数组大小，让编译器算。
+e.特别适合初始数据稀疏的数组
+f.这个方法只有c99可以使用
+
+sizeof给出整个数组所占据的内容的大小，单位是字节。
+sizeof(a)/sizeof(a[0])  可以得出数组内有几个单元（这句话永远是正确的）（这样的代码，一旦修改数组中初始的数据，不需要修改遍历的代码）
+
+数组变量本身不能被赋值，要把一个数组的所有元素交给另一个数组，必须采用遍历。
+for(i=0;i=length;i++){
+    b[i]=a[i];
+}
+
+遍历数组通常都是使用for循环。这样循环体内最大的i正好是数组最大的有效下标。
+常见错误：a.循环结束条件是&lt;=数组长度，或； b.离开循环后，继续用i的值来做数组元素的下标。
+
+数组做为函数参数的时候，往往必须再用另一个参数来传入数组的大小。
+（原因：不能再利用sizeof来计算数组的元素个数；不能在[]中给出数组的大小）
+</code></pre><h2 id="第八天"><a href="#第八天" class="headerlink" title="第八天"></a>第八天</h2><pre><code>指针：指针是一个变量，其值为另一个变量的地址，即内存位置的直接地址。
+不同数据类型的指针之间唯一不同的是，指针所指向的变量或常量的数据类型不同。
+在变量声明的时候，如果没有确切的地址可以赋值，为指针变量赋一个NULL值是一个很好的习惯。赋为NULL值的指针被称为空指针。
+
+在大多数的操作系统中，程序不允许访问地址为零的内存，因为该内存是操作系统保留的。但他却有着特别重要的意义，它表明该指针不指向一个可访问的内存位置。
+
+指向指针的指针可以看作是一个指针链。
+</code></pre>
       
     </div>
     
@@ -357,6 +601,8 @@
         <div class="post-tags">
           
             <a href="/tags/technology/" rel="tag"># technology</a>
+          
+            <a href="/tags/C/" rel="tag"># C</a>
           
         </div>
       
@@ -467,8 +713,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -509,7 +764,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -570,6 +825,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一天"><span class="nav-number">1.</span> <span class="nav-text">第一天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-number">2.</span> <span class="nav-text">第二天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三天"><span class="nav-number">3.</span> <span class="nav-text">第三天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四天"><span class="nav-number">4.</span> <span class="nav-text">第四天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五天"><span class="nav-number">5.</span> <span class="nav-text">第五天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六天"><span class="nav-number">6.</span> <span class="nav-text">第六天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七天"><span class="nav-number">7.</span> <span class="nav-text">第七天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八天"><span class="nav-number">8.</span> <span class="nav-text">第八天</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
