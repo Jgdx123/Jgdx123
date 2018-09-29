@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="technology,PHP," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Error 520">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="This is the note what i learned from PHP.">
+<meta name="keywords" content="technology,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes about PHP">
+<meta property="og:url" content="http://yoursite.com/2018/09/30/post/index.html">
 <meta property="og:site_name" content="Error 520">
+<meta property="og:description" content="This is the note what i learned from PHP.">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-29T16:35:39.683Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Error 520">
+<meta name="twitter:title" content="Notes about PHP">
+<meta name="twitter:description" content="This is the note what i learned from PHP.">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/30/post/"/>
 
 
 
 
 
-  <title>Error 520</title>
+  <title>Notes about PHP | Error 520</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 <a href="https://your-url" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/30/post/" itemprop="url">Notes about PHP</a></h1>
+          <h1 class="post-title" itemprop="name headline">Notes about PHP</h1>
         
 
         <div class="post-meta">
@@ -340,16 +342,86 @@
       
 
       
-        
-          <p>This is the note what i learned from PHP.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/30/post/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>This is the note what i learned from PHP.</p>
+<a id="more"></a>
+<h2 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h2><pre><code>php:服务器端的开发语言。
+
+php能完成的工作：收集表单数据；生成动态网页（主要功能）；字符串处理；动态输出图像；服务器端文件系统操作；编写数据库支持的网页（php可以连接任何世界标准的数据库）；
+会话跟踪控制；处理XML文件；支持利用大量的网络协议（也可以开放原始网络端口，使得任何网络协议都可以在上面工作）；服务器端的其他相关操作；所有的主流操作系统都可以搭
+载，大部分的web服务器也可以（如：apache,iis等）
+
+CGI：通用网关接口。
+oop（面向对象编程）：最符合程序员的开发思想。
+
+在php文件中可以编写html,css,javascript等语言，但使用起始标记&lt;?php和?&gt;之前的代码用php应用服务器解析，将解析后的代码发到客户浏览器，在这个标记之外的，php服务器都
+不解析，直接发送给客户端，客户端再用浏览器解析。
+
+在整个程序的任何地方，都可以有起始和结束标记的使用。
+
+&lt;?php ?&gt; 这种标记，推荐使用，php程序员无法禁用。
+&lt;?  ?&gt; 这种标记，php程序员有时会禁用，因为它会干扰XML的文档声明。
+&lt;%  %&gt; 这种标记，移植性较差。
+&lt;script language=&quot;php&quot;&gt; &lt;/script&gt; 这种标记，不推荐，无法插入html文件当中。
+
+语句：功能执行语句（其后一定要加分号）（与?&gt;最近的一条语句可以不加分号，建议都加分号）
+      结构定义语句（其后一定不要加分号）
+
+// 单行注释；/* */ 多行注释（其中不能再包含多行注释，但可以包含单行）；# 文档注释；/** */ 文档注释
+注释要写在代码的上面或者右边。
+
+如果?&gt;标记之后，就是脚本结束，之后没有php程序了，可以不加该标记（建议不加）
+</code></pre><h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><pre><code>变量：是值在程序的运行过程中可以随时发生变化的量，是程序中数据的临时存放场所。
+Isset(); 判断变量是否存在（输出0或1）
+unset(); 释放变量
+&quot;$&quot; 变量的声明和使用都要有这个符号。
+
+php可以使用系统关键字作为变量名。（如if,for,switch等）
+注意：php变量区分大小写。（只有变量和常量区分大小写）
+变量名称命名一定要有意义。
+php里面的变量赋值一般是传值赋值。
+变量的地址通常是十六进制。
+存地址的变量就是指针。
+
+php中共有8种类型：4种标量（整形，布尔型，浮点型，字符串），2种复合类型（数组array，对象object），2种特殊类型（资源类型resource，空类型null）。
+Var_dump(变量和值) 输出它的值和类型。
+以0开头的表示以8进制声明一个变量，以0x或0X开头的表示以16进制声明一个变量，整数的最大值是4个字节，
+3.14E5 = 3.14E+5 = 3.14*(10^5)  
+布尔值是false的情况，零，null，零字符串，空字符串，无成员的数组。
+
+字符串声明的方法：1.单引号和双引号都可以声明字符串。2.声明的字符串没有长度限制。3.在双引号的字符串中，既可以直接解析变量，又可以直接使用转义字符。
+4.在单引号的字符串中，不可以解析变量，也不可以使用转义字符。5.在双引号中不能再使用双引号，在单引号中不能再使用单引号。5.最好使用单引号。（双引号会更
+多的使用资源）
+
+数据类型之间的相互转换：强制转换（setType(变量,类型)；在赋值前使用(类型)的形式，不会改变原变量的类型），自动转换（常用，开发时变量会根据运行环境自动转换）。
+
+与变量和类型有关的一些变量和函数：
+issset(); 判断一个变量是否存在（输出1或0）
+empty(); 判断一个变量是否为空（输出1或0）
+unset(); 释放一个变量
+getType(); 得到一个变量的类型
+
+常量的声明与使用：
+1.常量是一个简单值的标识符。
+2.不能使用unset()取消。
+3.常量可以不用理会变量范围的规则，而在任何地方都可以定义和访问。
+4.常量使用define(&quot;常量名&quot;,&quot;值&quot;);
+5.常量声明和使用都不使用&quot;$&quot;。
+6.常量名成习惯都使用大写。
+7.常量只能用做标量（int,float,bool,string）
+8.defined(&quot;常量&quot;);  
+
+预定义常量（使用指定的名称就会输出里面的值）和魔术常量（会随不同的情况而改变）
+
+运算符号：按运算符的功能分为：算数运算符（+ - * / % ++ --），字符串运算符（.(可以叫做连接运算符)），赋值运算符（= += -= *= /= %= .=(连接)），比较运算符（&gt; 
+&lt; &gt;= &lt;= == ===(比较是内容和类型都要相同) != &lt;&gt; !==）（也叫条件运算符，关系运算符），逻辑运算符（&amp;&amp;或and ||或or !=或&lt;&gt; !==）（只能操作bool型值，返回的也是
+bool型值），位运算符（&amp;&amp; | ^ ~ &lt;&lt; &gt;&gt; &gt;&gt;&gt;），其他运算符（？ : `` @ =&gt; -&gt; :: &amp; $）
+
+短路问题：&amp;&amp;和||会发生短路。（&amp;&amp;在做运算时，若前面的数是false，则后面的数是否位true，不再去判断）（||在做运算时，若前面的数为true，则后面的是否位false，不
+再去判断）（&amp;或|在做运算时，两边都会被执行）
+
+优先级：最好是用括号来改变优先级。
+表达式：只要有变量和运算符参与的式子就是表达式。
+</code></pre>
       
     </div>
     
@@ -364,306 +436,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EdmundYue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Error 520">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/26/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T00:37:16+08:00">
-                2018-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/technology/" rel="tag"># technology</a>
           
-
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/26/hello-world/#more" rel="contents">
-              Read more &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/26/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/post/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="EdmundYue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Error 520">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/26/post/" itemprop="url">Notes about C</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T00:30:16+08:00">
-                2018-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>This is the note what i learned from C.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/26/post/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -673,10 +477,49 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -684,6 +527,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -704,8 +551,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -807,6 +663,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一天"><span class="nav-number">1.</span> <span class="nav-text">第一天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-number">2.</span> <span class="nav-text">第二天</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -953,6 +825,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
