@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Error 520">
 <meta property="og:description" content="This is the note what i learned from C.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-26T13:42:14.665Z">
+<meta property="og:updated_time" content="2018-10-01T03:55:02.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes about C">
 <meta name="twitter:description" content="This is the note what i learned from C.">
@@ -576,6 +576,11 @@ for(i=0;i=length;i++){
 
 数组做为函数参数的时候，往往必须再用另一个参数来传入数组的大小。
 （原因：不能再利用sizeof来计算数组的元素个数；不能在[]中给出数组的大小）
+
+二维数组：int a[3][4] 通常理解为a是一个3行4列的矩阵。
+a[i][j]是一个int。
+a[i,j]相当于是a[j]
+二维数组的初始化：a.列数必须给出，行数可以由编译器来数。b.每行一个{}，用逗号分隔。
 </code></pre><h2 id="第八天"><a href="#第八天" class="headerlink" title="第八天"></a>第八天</h2><pre><code>指针：指针是一个变量，其值为另一个变量的地址，即内存位置的直接地址。
 不同数据类型的指针之间唯一不同的是，指针所指向的变量或常量的数据类型不同。
 在变量声明的时候，如果没有确切的地址可以赋值，为指针变量赋一个NULL值是一个很好的习惯。赋为NULL值的指针被称为空指针。
@@ -583,6 +588,29 @@ for(i=0;i=length;i++){
 在大多数的操作系统中，程序不允许访问地址为零的内存，因为该内存是操作系统保留的。但他却有着特别重要的意义，它表明该指针不指向一个可访问的内存位置。
 
 指向指针的指针可以看作是一个指针链。
+</code></pre><h2 id="第九天"><a href="#第九天" class="headerlink" title="第九天"></a>第九天</h2><pre><code>实际参数：当函数被调用时，会向参数传递一个值，这个值叫做实际参数。
+形式参数：接受这些值的变量叫做形式参数。
+
+传值调用：把参数的实际值赋给函数的形式参数。这种情况下。修改函数内的形式参数不会影响实际参数。
+引用调用：把参数的地址复制给形式参数。在函数内，该地址用于访问调用中要用到的实际参数。
+
+typedef 关键字：可以使用它来为类型取一个新的名字。也可以用来定义一个新的类型。（定义时大写来提醒用户类型名称是一个象征性的缩写，但也可以小写）
+
+结构体：结构是C编程中另一种用户自定义的可用的数据类型，它允许您存储不同类型的数据项。
+struct 语句定义了一个包含多个成员的新的数据类型。
+</code></pre><h2 id="第十天"><a href="#第十天" class="headerlink" title="第十天"></a>第十天</h2><pre><code>以0（整数0）结尾的一串字符 （0或‘\0’是一样的，但是和‘0’不同）（‘\0’是一个字节的0，0可能是一个int，‘0’是一个字符）
+0标志字符串的结束，但它不是字符串的一部分。（计算字符串长度的时候不包含这个0）
+字符串以数组的形式存在，以数组或指针的形式访问。 （更多的是以指针的形式）
+&lt;string.h&gt; 里有很多处理字符串的函数。
+如果有两个相邻的字符串，c编译器会自动将其连接起来。
+不能用运算符对字符串做运算。通过数组的方式可以遍历字符串。
+唯一特殊的地方是字符串字面量可以可以用来初始化字符数组。
+
+在%和s之间的数字表示最多允许读入的字符的数量，这个数字应该比数组的大小小一。
+常见错误：
+a.以为char*是字符串类型，定义了一个字符串类型的变量string就可以直接使用了。（由于没有对string初始化为0，所以不一定每次都出错。）
+
+空字符串，char buffer[100]=&quot;&quot;;（这是一个空的字符串，buffer[0]=&apos;\0&apos;） char buffer[]=&quot;&quot;;（这个数组的长度只有一）
 </code></pre>
       
     </div>
@@ -835,7 +863,7 @@ for(i=0;i=length;i++){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一天"><span class="nav-number">1.</span> <span class="nav-text">第一天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-number">2.</span> <span class="nav-text">第二天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三天"><span class="nav-number">3.</span> <span class="nav-text">第三天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四天"><span class="nav-number">4.</span> <span class="nav-text">第四天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五天"><span class="nav-number">5.</span> <span class="nav-text">第五天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六天"><span class="nav-number">6.</span> <span class="nav-text">第六天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七天"><span class="nav-number">7.</span> <span class="nav-text">第七天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八天"><span class="nav-number">8.</span> <span class="nav-text">第八天</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一天"><span class="nav-number">1.</span> <span class="nav-text">第一天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二天"><span class="nav-number">2.</span> <span class="nav-text">第二天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三天"><span class="nav-number">3.</span> <span class="nav-text">第三天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四天"><span class="nav-number">4.</span> <span class="nav-text">第四天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五天"><span class="nav-number">5.</span> <span class="nav-text">第五天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六天"><span class="nav-number">6.</span> <span class="nav-text">第六天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七天"><span class="nav-number">7.</span> <span class="nav-text">第七天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八天"><span class="nav-number">8.</span> <span class="nav-text">第八天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九天"><span class="nav-number">9.</span> <span class="nav-text">第九天</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十天"><span class="nav-number">10.</span> <span class="nav-text">第十天</span></a></li></ol></div>
             
 
           </div>
