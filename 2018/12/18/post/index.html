@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="technology,Yii," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="Notes about Yii">
+<meta name="keywords" content="technology,Yii">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yii">
+<meta property="og:url" content="http://yoursite.com/2018/12/18/post/index.html">
 <meta property="og:site_name" content="Error 520">
+<meta property="og:description" content="Notes about Yii">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T12:43:16.072Z">
+<meta property="og:updated_time" content="2018-12-18T08:11:05.210Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="Yii">
+<meta name="twitter:description" content="Notes about Yii">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/18/post/"/>
 
 
 
 
 
-  <title>tags | Error 520</title>
+  <title>Yii | Error 520</title>
   
 
 
@@ -237,40 +241,281 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/18/post/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EdmundYue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Error 520">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                6 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/C/" style="font-size: 12px; color: #ccc">C</a> <a href="/tags/PHP/" style="font-size: 12px; color: #ccc">PHP</a> <a href="/tags/Yii/" style="font-size: 12px; color: #ccc">Yii</a> <a href="/tags/answer/" style="font-size: 12px; color: #ccc">answer</a> <a href="/tags/cryptology/" style="font-size: 12px; color: #ccc">cryptology</a> <a href="/tags/technology/" style="font-size: 30px; color: #111">technology</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">Yii</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-18T16:06:28+08:00">
+                2018-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/study/" itemprop="url" rel="index">
+                    <span itemprop="name">study</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>Notes about Yii<br><a id="more"></a></p>
+<p>##第一天</p>
+<pre><code>MVC  model模型 view视图 controller控制器    
+
+1.入口脚本 web/index.php
+  a.是打开每一个网页的第一个环节
+  b.一个应用只有一个入口脚本
+  c.必须放置在浏览器可以访问的web浏览器目录下
+2.入口脚本的作用
+  a.定义全局变量
+  b.注册composer自动加载类
+  c.包含Yii类文件
+  d.加载应用配置
+  e.创建一个应用实例并配置
+  f.调用 yii\base\Application::run()来处理请求
+
+3.应用主体 Application(原本他大多是指一个系统) （在Yii内是一个实例化的对象，是一个微观的对象）
+  a.是管理Yii应用系统整体结构和生命周期的对象
+
+4.控制器 
+  a.是MVC结构中的C这个部分
+  b.从yii\web\Controller继承来
+  c.负责处理请求和生成响应
+5.组成
+  a.控制器主要由动作(action)组成
+  b.动作是控制器类中的方法
+  c.一个动作对应一个页面
+
+6.视图的布局 @app/view/layouts/main.php 
+  a.布局是一种特殊的视图，表现了多个视图的公共部分。
+
+7.模型 basic/models/ContactForm.php
+  写模型类要从 yii\base\Model 中去继承
+  a.模形是表现业务数据，规则和逻辑的对象。
+  b.yii\base\Model 支持许多使用的特性：
+    属性：表现业务数据，与普通类的属性或数组性质相同。
+    属性标签：指定属性显示出来的标签。相当于是对属性重命名，方便人们理解含义。
+    块赋值：用一行代码将用户所有的表单输入填充到一个模型，非常方便。
+    验证规则：确保输入数据符合所申明的验证规则。比如对数据进行验证，判断其是否合法。 yii\base\Model::validate()
+
+8.表单 yii\widgets\ActiveForm类来创建表单
+  a. ActiveForm::field() 方法来创建表单元素与元素的标签，以及对应的javascript验证。
+</code></pre><p>##第二天</p>
+<pre><code>1.ActiveRecord类
+  a.每个AR类对应一张数据表。
+  b.每一个属性代表数据表的一个列，每一个AR对象代表数据表的一行。
+  c.这样可以直接以面向对象的方式来操纵数据表中的数据，这样就不再需要写sql语句来访问数据库了。
+
+2.ActiveQueryInterface类
+  a.all(),one() 执行查询，并返回AR对象
+  b.where(),orWhere(),andWhere() 查询条件
+  c.orderBy(),andOrderBy() 排序
+  d.count() 返回符合查询条件的记录数
+  e.limit() 取出查询结果的条数
+  f.with() 指定关联表的字段
+  注：增删改查时，最好使用save()方法，它会自动判断是增加还是修改。
+
+3.数据小部件
+  a.DetailView 用来显示一条数据
+    model 可以是一个模型类的实例，也可以是一个数组、
+    attributes和value 分开展示属性标签和属性值
+    template和options 可以调节整个DetailView的格式
+  b.ListView和GridView 用来显示一个列表或者一个表格，有过滤分页排序的功能
+</code></pre><p>##第三天</p>
+<pre><code> URL 中的参数 r 代表路由，是整个应用级的， 指向特定操作的独立 ID。
+ 控制器和操作都有唯一的ID，具有同样的的命名规则。
+
+ 表达式Yii::$app代表应用实例，全局可访问。他也是一个服务定位器（用来检测当前需要哪些服务并提供），
+
+model: 存储数据，逻辑。与数据库有关 
+view: 用户看到的页面，从模型中获取数据 
+controller: 控制页面的数据交互
+
+html表单首先会提交给javascript脚本验证，然后才会提交给服务器通过php验证。
+
+pagination 分页功能
+</code></pre>
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/technology/" rel="tag"># technology</a>
+          
+            <a href="/tags/Yii/" rel="tag"># Yii</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/01/post/" rel="next" title="Notes about cryptology">
+                <i class="fa fa-chevron-left"></i> Notes about cryptology
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
   </div>
 
 
