@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Error 520">
 <meta property="og:description" content="Notes about Yii">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-18T08:14:27.933Z">
+<meta property="og:updated_time" content="2019-01-12T13:39:35.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Yii">
 <meta name="twitter:description" content="Notes about Yii">
@@ -415,6 +415,729 @@ controller: 控制页面的数据交互
 html表单首先会提交给javascript脚本验证，然后才会提交给服务器通过php验证。
 
 pagination 分页功能
+
+小部件：可被不同视图重复调用
+
+YII_DEBUG 标识是否启用调试模式，默认false，一般在开发时启用
+YII_ENV 标识应用运行环境
+YII_ENABLE_ERROR_HANDLER 标识是否启用Yii提供的错误处理
+
+应用主体是管理Yii应用程序整个程序结构和生命周期的对象
+    网页应用主体：处理网页请求   
+    控制台应用主体：处理控制台请求
+
+bootstrap 允许你用数组指定启动阶段需要使用的组件
+    注意：组建启动过多会降低系统性能，因为每一次请求都会重新运行一次所有组件。
+
+运行入口脚本：（一个应用只有一个入口脚本）（网页应用和控制台应用）
+  1.定义全局常量
+  2.注册composer自动加载类
+  3.包含Yii类文件
+  4.加载应用配置
+  5.创建一个应用实例并配置
+  6.调用 yii\base\Application::run() 来处理请求
+
+注意：控制器类全面能被 自动加载， 这点是非常重要的，控制器类的实际命名空间对应这个
+属性， 否则，访问时你会收到“Page Not Found”。
+
+模块：模块是独立的软件单元，由模型，视图， 控制器和其他支持组件组成， 终端用户可以访问在
+  应用主体中已安装的模块的控制器， 模块被当成小应用主体来看待，和应用主体不同的是， 模块不能单独部署，必须属于某个应用主体。
+
+小部件：小部件基本上在 views 中使用， 在视图中可调用 yii\base\Widget::widget() 方法使用小部件。 该方法使用 配置 数组初始化
+小部件并返回小部件渲染后的结果。 
+
+
+//语言包配置 （frontend/config/main.php）
+    &apos;i18n&apos; =&gt; [
+        &apos;translations&apos; =&gt; [
+            &apos;*&apos; =&gt; [
+                &apos;class&apos; =&gt; &apos;yii\i18n\PhpMessageSource&apos;,
+                // &apos;basePath&apos; =&gt; &apos;/messages&apos;,
+                &apos;fileMap&apos; =&gt; [
+                    &apos;common&apos; =&gt; &apos;common.php&apos;,
+                ],
+            ]
+        ],
+    ],
+
+
+//属性标签的设定 
+
+属性标签通过yii\base\Model::generateAttributeLabel()方法自动从属性名生成. 它会自动将驼峰式大小写变量名转换为多个首字母大写的单词， 
+例如 username 转换为 Username， firstName 转换为 First Name。
+
+如果你不想用自动生成的标签，可以覆盖 yii\base\Model::attributeLabels() 方法明确指定属性标签， 
+例如：
+    public function attributeLabels()
+    {
+        return [
+            &apos;name&apos; =&gt; &apos;Your name&apos;,
+            &apos;email&apos; =&gt; &apos;Your email address&apos;,
+            &apos;subject&apos; =&gt; &apos;Subject&apos;,
+            &apos;body&apos; =&gt; &apos;Content&apos;,
+        ];
+    }
+</code></pre><p>##四。</p>
+<pre><code>common/models 中的***Model文件中的属性与数据库中的表的键名对应。
+frontend(backend)/models 中的***Form文件中的属性与实际表单中的表单项相对应。 
+
+1.引入面包屑小插件
+use yii\widgets\Breadcrumbs;
+
+2.在显示的面包屑的地方的写法
+layout.php布局页面
+echo Breadcrumbs::widget([
+   //首页
+    &apos;homeLink&apos; =&gt; [&apos;label&apos; =&gt; &apos;首页&apos;, &apos;url&apos; =&gt; [&apos;/admin/default/index&apos;]],
+    //如果其他页面有设置params这个参数中的breadcrumbs,那就显示里面的内容，注意里面是个数组
+    &apos;links&apos; =&gt; isset($this-&gt;params[&apos;breadcrumbs&apos;]) ? $this-&gt;params[&apos;breadcrumbs&apos;]:[],
+    //面包屑显示的模板
+    &apos;itemTemplate&apos; =&gt; &quot;&lt;li&gt;&lt;b&gt;{link}&lt;/b&gt;&lt;/li&gt;&amp;gt;&quot;,
+]);
+
+3.具体的内容文件中
+add.php
+
+$this-&gt;params[&apos;breadcrumbs&apos;][] = [&apos;label&apos; =&gt; &apos;分类管理&apos;,&apos;url&apos;=&gt;[&apos;/admin/category/list&apos;]];
+$this-&gt;params[&apos;breadcrumbs&apos;][] = [&apos;label&apos; =&gt; &apos;添加分类&apos;,];
+
+以上是一个比较详细的实例，其实面包屑的在Yii2.0中的详细写法如下：
+echo Breadcrumbs::widget([    
+    &apos;itemTemplate&apos; =&gt; &quot;&lt;li&gt;&lt;i&gt;{link}&lt;/i&gt;&lt;/li&gt;\n&quot;, // 所有label的模板样式
+    &apos;links&apos; =&gt; [       
+         [&apos;label&apos; =&gt; &apos;Post Category&apos;,&apos;url&apos; =&gt; [&apos;post-category/view&apos;, &apos;id&apos; =&gt; 10],
+        &apos;template&apos; =&gt; &quot;&lt;li&gt;&lt;b&gt;{link}&lt;/b&gt;&lt;/li&gt;\n&quot;, // 该label的模板样式
+    ],        
+        [&apos;label&apos; =&gt; &apos;Sample Post&apos;, &apos;url&apos; =&gt; [&apos;post/edit&apos;, &apos;id&apos; =&gt; 1]],    
+    ],
+]);
+就是在里面需要显示就把这个写一遍，面包屑显示的层级有几级就写几个label
+
+url美化：在配置文件中使用 &apos;urlManager&apos;
+    &apos;suffix&apos; 增加后缀
+    &apos;showScriptName&apos; 
+    &apos;enablePrettyUrl&apos;
+(在components里面写)
+
+语言包配置：&apos;i18n&apos;
+国际化（I18N）是指在设计软件时，使它可以无需做大的改变就能够适应不同的语言和地区的需要。
+对于 Web 应用程序， 这有着特别重要的意义，因为潜在的用户可能会在全球范围内。
+Yii 提供的国际化功能支持全方位信息翻译， 视图翻译，日期和数字格式化。(默认的 源语言 值是 en-US, 美国)
+调用 Yii::t() 方法且在其中包含每一条要翻译的消息；
+</code></pre><p>##五。</p>
+<pre><code>授权：授权是指验证用户是否允许做某件事情的过程。
+    Yii的两种授权方法：存取控制过滤器(ACF)和基于角色的存取控制(RBAC)
+
+RBAC：a.建立授权数据 b.使用授权的数据在需要的地方执行检查
+    角色：权限的集合。可以用一个规则 rule 与一个角色或者权限关联。
+    （一个规则用一段代码代表， 规则的执行是在检查一个用户是否满足这个角色或者权限时进行的。）
+    （层次关系：一个角色可由其他角色或权限构成，而权限又由其他权限构成）
+
+Yii 提供了两套授权管理器： yii\rbac\PhpManager 和 yii\rbac\DbManager。
+
+a.使用 PhpManager
+以下代码展示使用 yii\rbac\PhpManager 时如何在应用配置文件中配置 authManager：
+
+    return [
+        // ...
+        &apos;components&apos; =&gt; [
+            &apos;authManager&apos; =&gt; [
+                &apos;class&apos; =&gt; &apos;yii\rbac\PhpManager&apos;,
+            ],
+            // ...
+        ],
+    ];
+
+现在可以通过 \Yii::$app-&gt;authManager 访问 authManager 。
+
+yii\rbac\PhpManager 默认将 RBAC 数据保存在 @app/rbac 目录下的文件中。 如果权限
+层次数据在运行时会被修改，需确保WEB服务器进程对该目录和其中的文件有写权限。
+b.使用 DbManager
+以下代码展示使用 yii\rbac\DbManager 时如何在应用配置文件中配置 authManager：
+
+    return [
+        // ...
+        &apos;components&apos; =&gt; [
+            &apos;authManager&apos; =&gt; [
+                &apos;class&apos; =&gt; &apos;yii\rbac\DbManager&apos;,
+                // uncomment if you want to cache RBAC items hierarchy
+                // &apos;cache&apos; =&gt; &apos;cache&apos;,
+            ],
+            // ...
+        ],
+    ];
+
+
+使用迁移（Using migrations）
+您可以使用 migrations 通过 authManager 提供的 API 初始化和修改层次结构。
+
+使用 ./yii migrate/create init_rbac 创建新迁移，然后实现创建层次结构：
+
+    &lt;?php
+    use yii\db\Migration;
+
+    class m170124_084304_init_rbac extends Migration
+    {
+        public function up()
+        {
+            $auth = Yii::$app-&gt;authManager;
+
+            // 添加 &quot;createPost&quot; 权限
+            $createPost = $auth-&gt;createPermission(&apos;createPost&apos;);
+            $createPost-&gt;description = &apos;Create a post&apos;;
+            $auth-&gt;add($createPost);
+
+            // 添加 &quot;updatePost&quot; 权限
+            $updatePost = $auth-&gt;createPermission(&apos;updatePost&apos;);
+            $updatePost-&gt;description = &apos;Update post&apos;;
+            $auth-&gt;add($updatePost);
+
+            // 添加 &quot;author&quot; 角色并赋予 &quot;createPost&quot; 权限
+            $author = $auth-&gt;createRole(&apos;author&apos;);
+            $auth-&gt;add($author);
+            $auth-&gt;addChild($author, $createPost);
+
+            // 添加 &quot;admin&quot; 角色并赋予 &quot;updatePost&quot; 
+            // 和 &quot;author&quot; 权限
+            $admin = $auth-&gt;createRole(&apos;admin&apos;);
+            $auth-&gt;add($admin);
+            $auth-&gt;addChild($admin, $updatePost);
+            $auth-&gt;addChild($admin, $author);
+
+            // 为用户指派角色。其中 1 和 2 是由 IdentityInterface::getId() 返回的id
+            // 通常在你的 User 模型中实现这个函数。
+            $auth-&gt;assign($author, 2);
+            $auth-&gt;assign($admin, 1);
+        }
+
+        public function down()
+        {
+            $auth = Yii::$app-&gt;authManager;
+
+            $auth-&gt;removeAll();
+        }
+    }
+
+
+数据缓存：数据缓存是指将一些 PHP 变量存储到缓存中，使用时再从缓存中取回。 
+
+一个典型的数据缓存使用模式
+    //尝试从缓存中取出值
+    $data = $cache-&gt;get($key);
+
+    if($data === false){
+        //若缓存中未找到相应数据，则重新计算它的值
+        //将 $data 放入缓存中，供下次使用
+        $cache-&gt;set($key, $data);
+    }
+
+从2.0.11版本开始, 缓存组件 提供了getOrSet() 方法来简化数据的取回、计算和
+存储。 下面的代码逻辑和上一个例子是完全一样的:
+
+    $data = $cache-&gt;getOrSet($key, function () {
+        return $this-&gt;calculateSomething();
+    });
+
+
+缓存组件
+数据缓存需要缓存组件提供支持，它代表各种缓存存储器， 例如内存，文件，数据库。
+
+缓存组件通常注册为应用程序组件，这样它们就可以 在全局进行配置与访问。如下代
+码演示了如何配置应用程序组件 cache 使用两个 memcached 服务器：
+
+    &apos;components&apos; =&gt; [
+        &apos;cache&apos; =&gt; [
+            &apos;class&apos; =&gt; &apos;yii\caching\MemCache&apos;,
+            &apos;servers&apos; =&gt; [
+                [
+                    &apos;host&apos; =&gt; &apos;server1&apos;,
+                    &apos;port&apos; =&gt; 11211,
+                    &apos;weight&apos; =&gt; 100,
+                ],
+                [
+                    &apos;host&apos; =&gt; &apos;server2&apos;,
+                    &apos;port&apos; =&gt; 11211,
+                    &apos;weight&apos; =&gt; 50,
+                ],
+            ],
+        ],
+    ],
+
+然后就可以通过 Yii::$app-&gt;cache 访问上面的缓存组件了。
+
+yii\caching\FileCache：使用标准文件存储缓存数据。 这个特别适用于缓存大块数
+据，例如一个整页的内容。
+yii\caching\MemCache：使用 PHP memcache 和 memcached 扩展。 这个选项被看作
+分布式应用环境中（例如：多台服务器，有负载均衡等） 最快的缓存方案。
+
+缓存 API ¶
+所有缓存组件都有同样的基类 yii\caching\Cache ，因此都支持如下 API：
+
+get()：通过一个指定的键（key）从缓存中取回一项数据。 如果该项数据不存在
+  于缓存中或者已经过期/失效，则返回值 false。
+set()：将一个由键指定的数据项存放到缓存中。
+add()：如果缓存中未找到该键，则将指定数据存放到缓存中。
+getOrSet()：返回由键指定的缓存项，或者执行回调函数，把函数的返回值用键
+  来关联存储到缓存中， 最后返回这个函数的返回值。
+multiGet()：由指定的键获取多个缓存数据项。
+multiSet()：一次存储多个数据项到缓存中，每个数据都由一个键来指明。
+multiAdd()：一次存储多个数据项到缓存中，每个数据都由一个键来指明。 如果
+  某个键已经存在，则略过该数据项不缓存。
+exists()：返回一个值，指明某个键是否存在于缓存中。
+delete()：通过一个键，删除缓存中对应的值。
+flush()：删除缓存中的所有数据。
+
+
+模块：模块是独立的软件单元，由模型, 视图, 控制器和其他支持组件组成， 终端用
+户可以访问在应用主体中已安装的模块的控制器， 模块被当成小应用主体来看待，和
+应用主体不同的是， 模块不能单独部署，必须属于某个应用主体。
+
+创建模块：
+    forum/
+        Module.php                   模块类文件
+        controllers/                 包含控制器类文件
+            DefaultController.php    default 控制器类文件
+        models/                      包含模型类文件
+        views/                       包含控制器视图文件和布局文件
+            layouts/                 包含布局文件
+            default/                 包含DefaultController控制器视图文件
+                index.php            index视图文件
+
+
+请求：一个应用的请求是用 yii\web\Request 对象来表示的，该对象提供了诸如 请求
+参数（译者注：通常是GET参数或者POST参数）、HTTP头、cookies等信息。
+
+请求参数：要获取请求参数，你可以调用 request 组件的 get() 方法和 post() 方法。
+他们分别返回 $_GET 和 $_POST 的值。例如，
+
+    $request = Yii::$app-&gt;request;
+
+    $get = $request-&gt;get(); 
+    // 等价于: $get = $_GET;
+
+    $id = $request-&gt;get(&apos;id&apos;);   
+    // 等价于: $id = isset($_GET[&apos;id&apos;]) ? $_GET[&apos;id&apos;] : null;
+
+    $id = $request-&gt;get(&apos;id&apos;, 1);   
+    // 等价于: $id = isset($_GET[&apos;id&apos;]) ? $_GET[&apos;id&apos;] : 1;
+
+    $post = $request-&gt;post(); 
+    // 等价于: $post = $_POST;
+
+    $name = $request-&gt;post(&apos;name&apos;);   
+    // 等价于: $name = isset($_POST[&apos;name&apos;]) ? $_POST[&apos;name&apos;] : null;
+
+    $name = $request-&gt;post(&apos;name&apos;, &apos;&apos;);   
+    // 等价于: $name = isset($_POST[&apos;name&apos;]) ? $_POST[&apos;name&apos;] : &apos;&apos;;
+
+请求URLs：request 组件提供了许多方式来检测当前请求的URL。
+
+假设被请求的URL是 http://example.com/admin/index.php/product?id=100， 
+你可以像下面描述的那样获取URL的各个部分：
+    yii\web\Request::url：返回 /admin/index.php/product?id=100, 此URL不包括host info部分。
+    yii\web\Request::absoluteUrl：返回 http://example.com/admin/index.php/product?id=100, 包含host infode的整个URL。
+    yii\web\Request::hostInfo：返回 http://example.com, 只有host info部分。
+    yii\web\Request::pathInfo：返回 /product， 这个是入口脚本之后，问号之前（查询字符串）的部分。
+    yii\web\Request::queryString：返回 id=100,问号之后的部分。
+    yii\web\Request::baseUrl：返回 /admin, host info之后， 入口脚本之前的部分。
+    yii\web\Request::scriptUrl：返回 /admin/index.php, 没有path info和查询字符串部分。
+    yii\web\Request::serverName：返回 example.com, URL中的host name。
+    yii\web\Request::serverPort：返回 80, 这是web服务中使用的端口。
+
+客户端信息：你可以通过 yii\web\Request::userHost 和 yii\web\Request::userIP 分别获取host name
+和客户机的IP地址， 例如，
+    $userHost = Yii::$app-&gt;request-&gt;userHost;
+    $userIP = Yii::$app-&gt;request-&gt;userIP;
+
+HTTP头：你可以通过 yii\web\Request::headers 属性返回的 header collection 获取HTTP头信息。 例如，
+
+    // $headers 是一个 yii\web\HeaderCollection 对象
+    $headers = Yii::$app-&gt;request-&gt;headers;
+
+    // 返回 Accept header 值
+    $accept = $headers-&gt;get(&apos;Accept&apos;);
+
+    if ($headers-&gt;has(&apos;User-Agent&apos;)) { /* 这是一个 User-Agent 头 */ }
+
+请求组件也提供了支持快速访问常用头的方法，包括：
+    yii\web\Request::userAgent：返回 User-Agent 头。
+    yii\web\Request::contentType：返回 Content-Type 头的值， Content-Type 是请求体中MIME类型数据。
+    yii\web\Request::acceptableContentTypes：返回用户可接受的内容MIME类型。 返回的类型是按照他们的质量得分来排序的。得分最高的类型将被最先返回。
+    yii\web\Request::acceptableLanguages：返回用户可接受的语言。 返回的语言是按照他们的偏好层次来排序的。第一个参数代表最优先的语言。
+
+
+Sessions：和 请求 和 响应类似， 默认可通过为 yii\web\Session 实例的 session 应用组件 来访问 sessions。
+
+开启和关闭 Sessions
+可使用以下代码来开启和关闭 session。
+
+    $session = Yii::$app-&gt;session;
+
+    // 检查session是否开启 
+    if ($session-&gt;isActive) ...
+
+    // 开启session
+    $session-&gt;open();
+
+    // 关闭session
+    $session-&gt;close();
+
+    // 销毁session中所有已注册的数据
+    $session-&gt;destroy();
+
+    多次调用open() 和close() 方法并不会产生错误， 因为方法内部会先检查session是否已经开启。
+
+注意：当使用 session 组件访问 session 数据时候， 如果 session 没有开启会自动开启， 这和通过
+$_SESSION 不同，$_SESSION 要求先执行 session_start()。
+
+Cookies：Yii使用 yii\web\Cookie 对象来代表每个 cookie， yii\web\Request 和 yii\web\Response 
+通过名为 &apos;cookies&apos; 的属性维护一个 cookie 集合，前者的 cookie 集合代表请求提交的 cookies， 后
+者的 cookie 集合表示发送给用户的 cookies。
+
+注：控制器是直接处理请求和响应的部分。 因此, 应当在控制器中读取和发送 cookie 。
+
+当前请求的cookie信息可通过如下代码获取：
+
+    // 从 &quot;request&quot; 组件中获取 cookie 集合(yii\web\CookieCollection)
+    $cookies = Yii::$app-&gt;request-&gt;cookies;
+
+    // 获取名为 &quot;language&quot; cookie 的值，如果不存在，返回默认值 &quot;en&quot;
+    $language = $cookies-&gt;getValue(&apos;language&apos;, &apos;en&apos;);
+
+    // 另一种方式获取名为 &quot;language&quot; cookie 的值
+    if (($cookie = $cookies-&gt;get(&apos;language&apos;)) !== null) {
+        $language = $cookie-&gt;value;
+    }
+
+    // 可将 $cookies 当作数组使用
+    if (isset($cookies[&apos;language&apos;])) {
+        $language = $cookies[&apos;language&apos;]-&gt;value;
+    }
+
+    // 判断是否存在名为&quot;language&quot; 的 cookie
+    if ($cookies-&gt;has(&apos;language&apos;)) ...
+    if (isset($cookies[&apos;language&apos;])) ...
+
+发送 Cookies可使用如下代码发送 cookie 到终端用户：
+
+    // 从 &quot;response&quot; 组件中获取 cookie 集合(yii\web\CookieCollection)
+    $cookies = Yii::$app-&gt;response-&gt;cookies;
+
+    // 在要发送的响应中添加一个新的 cookie
+    $cookies-&gt;add(new \yii\web\Cookie([
+        &apos;name&apos; =&gt; &apos;language&apos;,
+        &apos;value&apos; =&gt; &apos;zh-CN&apos;,
+    ]));
+
+    // 删除一个 cookie
+    $cookies-&gt;remove(&apos;language&apos;);
+    // 等同于以下删除代码
+    unset($cookies[&apos;language&apos;]);
+
+当使用 cookie 验证时，必须指定 yii\web\Request::$cookieValidationKey，它是用来生成上述的哈希值， 
+可通过在应用配置中配置 request 组件。
+
+    return [
+        &apos;components&apos; =&gt; [
+            &apos;request&apos; =&gt; [
+                &apos;cookieValidationKey&apos; =&gt; &apos;fill in a secret key here&apos;,
+            ],
+        ],
+    ];
+
+错误处理：(Handling Errors)
+    a.所有非致命PHP错误（如，警告，提示）会转换成可获取异常；
+    b.异常和致命的PHP错误会被显示， 在调试模式会显示详细的函数调用栈和源代码行数。
+    c.支持使用专用的 控制器操作 来显示错误；
+    d.支持不同的错误响应格式；
+
+error handler错误处理器根据常量YII_DEBUG的值来调整错误显示:
+    当YII_DEBUG 为 true (表示在调试模式)，错误处理器会显示异常以及详细的函数调用栈和源代码行数来帮助调试， 
+    当YII_DEBUG 为 false，只有错误信息会被显示以防止应用的敏感信息泄漏。
+
+
+环境常量（Environment Constants）
+配置经常要随着应用运行的不同环境更改。例如在开发环境中， 你可能使用名为 mydb_dev 的数据库，
+而生产环境则使用 mydb_prod 数据库。 为了便于切换使用环境，Yii 提供了一个定义在入口脚本中的
+YII_ENV 常量。 如下：
+
+    defined(&apos;YII_ENV&apos;) or define(&apos;YII_ENV&apos;, &apos;dev&apos;);
+
+你可以把 YII_ENV 定义成以下任何一种值：
+
+prod：生产环境。常量 YII_ENV_PROD 将被看作 true。 如果你没修改过，这就是 YII_ENV 的默认值。
+dev：开发环境。常量 YII_ENV_DEV 将被看作 true。
+test：测试环境。常量 YII_ENV_TEST 将被看作 true。
+
+有了这些环境常量，你就可以根据当下应用运行环境的不同，进行差异化配置。 例如，应用可以包含下述代码只在开发环境中开启 调试工具。
+
+    $config = [...];
+
+    if (YII_ENV_DEV) {
+        // 根据 `dev` 环境进行的配置调整
+        $config[&apos;bootstrap&apos;][] = &apos;debug&apos;;
+        $config[&apos;modules&apos;][&apos;debug&apos;] = &apos;yii\debug\Module&apos;;
+    }
+
+    return $config;
+
+
+收发邮件：Yii 支持组成和发送电子邮件。然而，该框架提供的只有内容组成功能和基本接口。 
+实际的邮件发送机制可以通过扩展提供， 因为不同的项目可能需要不同的实现方式， 它通常取决于外部服务和库。
+
+配置
+邮件组件配置取决于你所使用的扩展。 一般来说你的应用程序配置应如下：
+
+    return [
+        //....
+        &apos;components&apos; =&gt; [
+            &apos;mailer&apos; =&gt; [
+                &apos;class&apos; =&gt; &apos;yii\swiftmailer\Mailer&apos;,
+            ],
+        ],
+    ];
+
+基本用法
+一旦 “mailer” 组件被配置，可以使用下面的代码来发送邮件：
+
+    Yii::$app-&gt;mailer-&gt;compose()
+        -&gt;setFrom(&apos;from@domain.com&apos;)
+        -&gt;setTo(&apos;to@domain.com&apos;)
+        -&gt;setSubject(&apos;Message subject&apos;)
+        -&gt;setTextBody(&apos;Plain text content&apos;)
+        -&gt;setHtmlBody(&apos;&lt;b&gt;HTML content&lt;/b&gt;&apos;)
+        -&gt;send();
+
+
+日志：Yii提供了一个强大的日志框架，这个框架具有高度的可定制性和可扩展性。
+使用这个框架， 你可以轻松地记录各种类型的消息，过滤它们， 并且将它们收集
+到不同的目标，诸如文件，数据库，邮件。
+
+使用Yii日志框架涉及下面的几个步骤：
+    a.在你代码里的各个地方记录 log messages；
+    b.在应用配置里通过配置 log targets 来过滤和导出日志消息；
+    c.检查由不同的目标导出的已过滤的日志消息（例如：Yii debugger）。
+
+
+浏览器跳转：浏览器跳转依赖于发送一个Location HTTP 头，因为该功能通常被使用， 
+Yii提供对它提供了特别的支持。
+
+可调用yii\web\Response::redirect() 方法将用户浏览器跳转到一个URL地址，该方法
+设置合适的 带指定URL的 Location 头并返回它自己为响应对象，在操作的方法中， 可
+调用缩写版yii\web\Controller::redirect()，例如：
+
+    public function actionOld()
+    {
+        return $this-&gt;redirect(&apos;http://example.com/new&apos;, 301);
+    }
+
+除了动作方法外，可直接调用yii\web\Response::redirect() 再调用 yii\web\Response::send() 
+方法来确保没有其他内容追加到响应中。
+
+    \Yii::$app-&gt;response-&gt;redirect(&apos;http://example.com/new&apos;, 301)-&gt;send();
+
+注意：yii\web\Response::redirect() 方法默认会设置响应状态码为302，该状态码会
+告诉浏览器请求的资源 临时 放在另一个URI地址上，可传递一个301状态码告知浏览器
+请求 的资源已经 永久 重定向到新的URId地址。
+
+
+使用数据块：数据块可以在一个地方指定视图内容在另一个地方显示，通常和布局一起使用，
+例如，可在内容视图中定义数据块在布局中显示它。
+
+调用 beginBlock() 和 endBlock() 来定义数据块， 使用 $view-&gt;blocks[$blockID] 访问该
+数据块， 其中 $blockID 为定义数据块时指定的唯一标识ID。例如：
+
+首先，在内容视图中定一个或多个数据块：
+
+    ...
+
+    &lt;?php $this-&gt;beginBlock(&apos;block1&apos;); ?&gt;
+
+    ...content of block1...
+
+    &lt;?php $this-&gt;endBlock(); ?&gt;
+
+    ...
+
+    &lt;?php $this-&gt;beginBlock(&apos;block3&apos;); ?&gt;
+
+    ...content of block3...
+
+    &lt;?php $this-&gt;endBlock(); ?&gt;
+
+然后，在布局视图中，数据块可用的话会渲染数据块， 如果数据未定义则显示一些默认内容。
+
+    ...
+    &lt;?php if (isset($this-&gt;blocks[&apos;block1&apos;])): ?&gt;
+        &lt;?= $this-&gt;blocks[&apos;block1&apos;] ?&gt;
+    &lt;?php else: ?&gt;
+        ... default content for block1 ...
+    &lt;?php endif; ?&gt;
+
+    ...
+
+    &lt;?php if (isset($this-&gt;blocks[&apos;block2&apos;])): ?&gt;
+        &lt;?= $this-&gt;blocks[&apos;block2&apos;] ?&gt;
+    &lt;?php else: ?&gt;
+        ... default content for block2 ...
+    &lt;?php endif; ?&gt;
+
+    ...
+
+    &lt;?php if (isset($this-&gt;blocks[&apos;block3&apos;])): ?&gt;
+        &lt;?= $this-&gt;blocks[&apos;block3&apos;] ?&gt;
+    &lt;?php else: ?&gt;
+        ... default content for block3 ...
+    &lt;?php endif; ?&gt;
+    ...
+
+
+json_encode($value[, $option = 0]) 对变量进行JSON编码（JSON数据是一个string类型的）
+
+json_decode() 将JSON数据进行解码，转换为PHP变量。
+json_decode($json[, $assoc = false[, $depth = 512[, $option = 0]]])
+   注意:1、$json 为待解码的数据，必须为utf8编码的数据；
+</code></pre><p>　　　　　　2、$assoc 值为TRUE时返回数组，FALSE时返回对象；<br>　　　　　　3、$depth 为递归深度；<br>　　　　　　4、$option 二进制掩码，目前只支持 JSON_BIGINT_AS_STRING；<br>　　　　　　5、一般只用前面两个参数，如果要数据类型的数据要加一个参数true。</p>
+<pre><code>注：通过 json_encode() 使其输出一个json形的数据，前端就可以相应其对应的数据模板。
+
+模板渲染的两种方式：
+    render(); 渲染父模板，回输出父模板内容
+    renderPartial(); 不渲染父模板
+
+通过在控制器内声明 $layout 可以指定你想要使用的视图 layouts 
+在视图中使用 $this-&gt;render(&apos;*&apos;) 可以实现模板间的相互调用。
+控制器中的 return $this-&gt;render(&apos;***&apos;); 指定数据传输到 *** 视图。
+
+
+节约内存：a.将从数据库中调出的数据以一个数组的形式展示出来。（asArray()）
+          b.通过分批的当时将数据逐批次的取出并显示。（batch()）
+
+
+在Yii中，要对表进行编辑，首先要将表进行实例化。因为一张表相当于一个模型，而一个
+模型的本质实际上就是一个类。所以对于一个类，就需要进行实例化才能调用其中的方法。
+
+save() 方法的功能可以替代 update() 和 insert()
+
+更新读取次数：updateAllCounters()
+
+删除记录：deleteAll(&apos;&apos;[, &apos;&apos;])
+一对一关联查询：with()
+
+hasOne() 和 hasMany()：一个简单的口诀，先附表的主键，后主表的主键。 
+
+
+声明规则（Rules）
+
+public function rules(){
+    return [
+        // name，email，subject 和 body 特性是 `require`（必填）的
+    [[&apos;name&apos;, &apos;email&apos;, &apos;subject&apos;, &apos;body&apos;], &apos;required&apos;],
+
+    // email 特性必须是一个有效的 email 地址
+    [&apos;email&apos;, &apos;email&apos;],
+    ]
+}
+
+
+缓存：
+    common/config/main.php
+    &lt;?php
+    &apos;components&apos; =&gt; [
+        &apos;cache&apos; =&gt; [
+            &apos;class&apos; =&gt; &apos;yii\caching\***&apos;,
+            &apos;keyPrefix&apos; =&gt; &apos;***&apos;, //唯一键前缀（解决缓存键重名问题）
+        ],
+    ],
+
+缓存过期：
+        $data = Yii::$app-&gt;cache-&gt;get(&apos;***&apos;);
+
+        if($data === false){
+            $data = Post::find()-&gt;count(); 
+            sleep(5);
+            Yii::$app-&gt;cache-&gt;set(&apos;***&apos;, $data, 60); //设置60秒后缓存过期
+        }
+
+        echo $data;
+
+缓存依赖：
+        $dependency = new DbDependency(
+            [***] \\***是条件，当这个条件发生变化时，缓存会被置为失效状态。
+        );
+
+    a.yii\caching\ChainedDependency：如果依赖链上任何一个依赖产生变化，则依赖改变。
+    b.yii\caching\DbDependency：如果指定 SQL 语句的查询结果发生了变化，则依赖改变。
+    c.yii\caching\ExpressionDependency：如果指定的 PHP 表达式执行结果发生变化，则依赖改变。
+    d.yii\caching\FileDependency：如果文件的最后修改时间发生变化，则依赖改变。
+    e.yii\caching\TagDependency：将缓存的数据项与一个或多个标签相关联。 您可以通过
+      调用  yii\caching\TagDependency::invalidate() 来检查指定标签的缓存数据项是否有效。
+
+
+yii\web\User::login() 方法将当前用户的身份登记到 yii\web\User。如果 session 设置
+为 enabled，则使用 session 记录用户身份，用户的 认证状态将在整个会话中得以维持。
+如果开启自动登录 enabled 则基于 cookie 登录（如：记住登录状态），它将使用 cookie
+保存用户身份，这样 只要 cookie 有效就可以恢复登录状态。
+
+为了使用 cookie 登录，你需要在应用配置文件中将 yii\web\User::$enableAutoLogin 设
+为 true。你还需要在 yii\web\User::login() 方法中 传递有效期（记住登录状态的时长）参数。
+
+
+浏览器跳转：
+浏览器跳转依赖于发送一个Location HTTP 头，因为该功能通常被使用， Yii提供对它提供了特别的支持。
+
+可调用yii\web\Response::redirect() 方法将用户浏览器跳转到一个URL地址，该方法设置合适的 带指定
+URL的 Location 头并返回它自己为响应对象，在操作的方法中， 可调用缩写版yii\web\Controller::redirect()，例如：
+
+    public function actionOld()
+    {
+        return $this-&gt;redirect(&apos;http://example.com/new&apos;, 301);
+    }
+
+注意：yii\web\Response::redirect() 方法默认会设置响应状态码为302，该状态码会告诉浏览器请求的资源 临时 
+放在另一个URI地址上，可传递一个301状态码告知浏览器请求 的资源已经 永久 重定向到新的URId地址。
+
+
+发送文件：
+和浏览器跳转类似，文件发送是另一个依赖指定HTTP头的功能， Yii提供方法集合来支持各种文件发送需求，它们对HTTP头都有内置的支持。
+
+这些方法都将响应对象作为返回值，如果要发送的文件非常大，应考虑使用 yii\web\Response::sendStreamAsFile() 因为它更节约内存， 以
+下示例显示在控制器操作中如何发送文件：
+
+    public function actionDownload()
+    {
+        return \Yii::$app-&gt;response-&gt;sendFile(&apos;path/to/file.txt&apos;);
+    }
+
+如果不是在操作方法中调用文件发送方法，在后面还应调用 yii\web\Response::send() 没有其他内容追加到响应中。
+
+    \Yii::$app-&gt;response-&gt;sendFile(&apos;path/to/file.txt&apos;)-&gt;send();
+
+
+处理密码
+大部分开发者知道密码不能以明文形式存储，但是许多开发者仍认为使用 md5 或者 sha1 来哈希化密码是安全的。 一度，使用
+上述的哈希算法是足够安全的，但是， 现代硬件的发展使得短时间内暴力破解上述算法生成的哈希串成为可能。
+
+为了即使在最糟糕的情况下（你的应用程序被破解了）也能给用户密码提供增强的安全性， 你需要使用一个能够对抗暴力破解
+攻击的哈希算法。目前最好的选择是 bcrypt。在 PHP 中， 你可以通过 crypt 函数 生成 bcrypt 哈希。 Yii 提供了两个帮助
+函数以让使用 crypt 来进行安全的哈希密码生成和验证更加容易。
+
+当一个用户为第一次使用，提供了一个密码时（比如：注册时），密码就需要被哈希化。
+
+    $hash = Yii::$app-&gt;getSecurity()-&gt;generatePasswordHash($password);
+
+哈希串可以被关联到对应的模型属性，这样，它可以被存储到数据库中以备将来使用。
+
+当一个用户尝试登录时，表单提交的密码需要使用之前的存储的哈希串来验证：
+
+    if (Yii::$app-&gt;getSecurity()-&gt;validatePassword($password, $hash)) {
+        // all good, logging user in
+    } else {
+        // wrong password
+    }
+
+
+in_array($needle, array $haystack, $strict = false);
+检查一个元素是否在数组中。
 </code></pre>
       
     </div>
@@ -687,7 +1410,7 @@ pagination 分页功能
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
