@@ -79,14 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta name="description" content="针对题库状态开放bug的修复">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题库状态bug">
+<meta property="og:url" content="http://yoursite.com/2019/01/16/题库状态bug/index.html">
 <meta property="og:site_name" content="Error 520">
+<meta property="og:description" content="针对题库状态开放bug的修复">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T12:42:48.484Z">
+<meta property="og:updated_time" content="2019-01-16T04:41:59.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="题库状态bug">
+<meta name="twitter:description" content="针对题库状态开放bug的修复">
 
 
 
@@ -116,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/16/题库状态bug/"/>
 
 
 
 
 
-  <title>categories | Error 520</title>
+  <title>题库状态bug | Error 520</title>
   
 
 
@@ -237,40 +240,182 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/16/题库状态bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="EdmundYue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Error 520">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">categories</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                1 category in total
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/study/">study</a><span class="category-list-count">5</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">题库状态bug</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T12:40:24+08:00">
+                2019-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>针对题库状态开放bug的修复<br><a id="more"></a></p>
+<h2 id="原始逻辑："><a href="#原始逻辑：" class="headerlink" title="原始逻辑："></a>原始逻辑：</h2><p>后台：<br>打开 题库状态设置 界面，statuscontroller 首先查询 TbcuitmoonDictionary 表中的 ‘设置题库状态’<br>一行中的 ‘CuitMoon_DictionaryCode’ 字段，并将查询得到得数据传送给 status/index 页面，显示出<br>当前的题库开放状态。<br>当需要改变状态时，通过 post 传输请求，statuscontroller 接收到请求后更新 CuitMoon_DictionaryCode<br>字段。</p>
+<p>前台：<br>baselimitcontroller 查询 ‘设置题库状态’ 一行的 ‘CuitMoon_DictionaryCode’ 字段，判断是否关闭题库。</p>
+<h2 id="问题点："><a href="#问题点：" class="headerlink" title="问题点："></a>问题点：</h2><p>整个题库是通过 ‘CuitMoon_DictionaryCode’ 字段来决定是否整个关闭，并没有关联单独的各科的题库。</p>
+<h2 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h2><p>是否可以通过给每一科加一个开放状态，通过 session 来定位每一科，依此来控制每一科的开放状态。</p>
+<p>利用 CuitMoon_DictionaryRemarks 字段来存储各科的题库开放状态。</p>
+<p>在 font/testcontroller 中新添加对 CuitMoon_DictionaryRemarks 是否为 10005001 的判定。<br>（注：开放为10005001， 关闭为10005002）</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/18/post/" rel="next" title="Yii">
+                <i class="fa fa-chevron-left"></i> Yii
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
   </div>
 
 
@@ -303,8 +448,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -406,6 +560,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原始逻辑："><span class="nav-number">1.</span> <span class="nav-text">原始逻辑：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题点："><span class="nav-number">2.</span> <span class="nav-text">问题点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考："><span class="nav-number">3.</span> <span class="nav-text">思考：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
